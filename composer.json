@@ -1,0 +1,36 @@
+{
+  "name": "jovix/admim-middleware",
+  "description": "Middleware for admin products.",
+  "minimum-stability": "dev",
+  "license": "Apache-2.0",
+  "require": {
+    "php": ">=7.1",
+    "guzzlehttp/guzzle": "^6.3",
+    "symfony/var-dumper": "^4.1",
+    "ext-json": "*",
+    "ext-curl": "*"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AdminMiddleware\\Providers\\AdminServiceProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "Vitaliy Lyabakh",
+      "email": "igrolan@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AdminMiddleware\\": "src/AdminMiddleware"
+    }
+  },
+  "scripts": {
+    "post-package-install":[
+      "@php artisan vendor:publish --provider=\"AdminMiddleware\\Providers\\AdminServiceProvider\""
+    ]
+  }
+}
