@@ -3,17 +3,18 @@
 namespace AdminMiddleware\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Client;
 
 class AdminAuthMiddleware
 {
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
 
-        $requestToken = $request->token ?? null;
+        $requestToken = $request->headers->get('amtToken');
 
-        if (!$request->token)
+        if ($requestToken === null)
             return response()->json(['message'=>'token for admin-auth not provided, you need check `token` param in your payload.', 'status_code'=>403], 403);
 
         $tokenFromCache = Cache::get('jovix_amt');
