@@ -33,7 +33,7 @@ class AdminAuthMiddleware
                     Cache::set('jovix_amt', $token);
                     return $next($request);
                 }else{
-                    response()->json(['message'=>'access denied, token mismatch', 'status_code'=>403], 403);
+                    return response()->json(['message'=>'access denied, token mismatch', 'status_code'=>403], 403);
                 }
 
             }catch (\Exception $exception){
